@@ -4,6 +4,8 @@ public class Heap {
 
   private final int[] _values;
   
+  private final String _demarcation = "'"; // TODO "'";
+  
   private final Geometry _geometry;
 
   public Heap(int[] values) {
@@ -22,6 +24,8 @@ public class Heap {
     buffer.append("tree leaves: " + _geometry.getTreeLeaves() + "\n");
 
     buffer.append("tree width: " + _geometry.getTreeWidth() + "\n");
+    
+    buffer.append(String.format("%" + Integer.toString(_geometry.getTreeMiddle()) + "s", "") + "|\n");
 
     buffer.append(toString(0));
     
@@ -37,47 +41,45 @@ public class Heap {
       return "";
     }
 
-    buffer.append("index: " + index + "\n");
+    //buffer.append("index: " + index + "\n");
 
-    buffer.append("level: " + _geometry.calcLevelFromIndex(index) + "\n");
+    //buffer.append("level: " + _geometry.calcLevelFromIndex(index) + "\n");
 
-    buffer.append("sections: " + _geometry.calcSectionsFromIndex(index) + "\n");
+    //buffer.append("sections: " + _geometry.calcSectionsFromIndex(index) + "\n");
 
-//    
-//    int unit_width = _line / sections;
-//    
-//    if (debug) {
-//      
-//      buffer.append("unit_width " + unit_width);
-//
-//      buffer.append("\n");
-//    }
-//    
-//    int element_on_lint = (i + 1) - ((int) Math.pow(2,  level) - 1);
-//
-//    if (debug) {
-//      buffer.append("element_on_lint " + element_on_lint);
-//
-//      buffer.append("\n");
-//    }
-//    
-//    buffer.append(String.format("%" + unit_width + "s", pad(_hash[i])));
-//
-//    buffer.append(toString(i + 1));
-//        
-//    return element_on_lint == 1 ? "\n" + buffer.toString() : buffer.toString();
+    //buffer.append("sections: " + _geometry.calcUnitWidth(index) + "\n");
+
+    //buffer.append("position on level: " + _geometry.calcPositionOnLevel(index) + "\n");
+
+    //buffer.append("total on level: " + _geometry.calcTotalOnLevel(index) + "\n");
+    
+    buffer.append(_demarcation + _geometry.getOffset(index) + _demarcation);
+    
+    String padded = _demarcation + pad(index) + _demarcation;
+    
+    buffer.append(padded);
+    
+    if (_geometry.isEndOfLine(index)) {
+      
+      buffer.append("\n");
+    }
+
+    buffer.append(toString(index + 1));
 
     return buffer.toString();
   }
 
-//  private String pad(int i) {
-//
-//    int padding = _width - (int) Math.log(i);
-//
-//    return String.format("%-" + Integer.toString(padding) + "s",
-//        String.format("%" + Integer.toString((int) (padding + 1) - ((int) padding / 2)) + "s", Integer.toString(i)));
-//  }
-  
-  ///  ;
+  private String pad(int index) {
+
+    String number = Integer.toString(_values[index]);
+    
+    int padding_total = _geometry.calcPadWidth() - number.length();
+    
+    String lhs = String.format("%" + Integer.toString(number.length() + (padding_total / 2)) + "s", number);
+
+    String rhs = String.format("%-" + Integer.toString(number.length() + padding_total) + "s", lhs);
+    
+    return rhs.replace(' ', '0');
+  }
   
 }
