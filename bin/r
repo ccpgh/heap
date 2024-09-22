@@ -1,0 +1,10 @@
+#!/bin/sh 
+
+\export PATH="$JAVA_HOME/bin":"$PATH"
+\export JAVA_BIN="$JAVA_HOME/bin/java"
+
+\cd ../app/build/libs
+
+"$JAVA_BIN" -Dfile.encoding=UTF-8 -cp app.jar heap.App 
+
+#1>/dev/null 2>/dev/null
