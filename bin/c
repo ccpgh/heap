@@ -2,4 +2,4 @@ clear
 cd ..
 ./gradlew clean
 ./gradlew build
-./gradlew javadoc
+#./gradlew javadoc

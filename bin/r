@@ -1,5 +1,7 @@
 #!/bin/sh 
 
+./c
+
 \export PATH="$JAVA_HOME/bin":"$PATH"
 \export JAVA_BIN="$JAVA_HOME/bin/java"
 
