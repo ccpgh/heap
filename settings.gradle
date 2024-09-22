@@ -8,4 +8,4 @@
  */
 
 rootProject.name = 'heap'
-include('app')
+include('heap')
